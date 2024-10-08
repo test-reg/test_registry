@@ -6,8 +6,8 @@ FROM code-server
 COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
 
 RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then umask 0002 && \
-    /opt/conda/bin/conda env create -n project -f /tmp/conda-tmp/environment.yml; fi && \
-    conda init && \
-    conda install -y -n project ipykernel && \
+    /opt/conda/bin/mamba env create -n project -f /tmp/conda-tmp/environment.yml; fi && \
+    mamba init && \
+    mamba install -y -n project ipykernel && \
     /opt/conda/envs/project/bin/python -m ipykernel install --name project --display-name "Project environment" --user && \
     echo "conda activate project" >> $HOME/.bashrc
